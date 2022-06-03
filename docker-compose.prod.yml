@@ -17,9 +17,9 @@ services:
       - nginx_network
       - db_network
     volumes:
-      - ./app:/home/app/web # 挂载项目代码
-      - static_vol:/home/app/web/static # 以数据卷挂载容器内static文件
-      - media_vol:/home/app/web/media # 以数据卷挂载容器内用户上传媒体文件
+      - ./app:/home/app/web # map project code
+      - static_vol:/home/app/web/static # map static file 
+      - media_vol:/home/app/web/media # map media file upload by user 
     env_file:
       - ./.env.dev
     ports:
@@ -46,11 +46,11 @@ services:
       context: ./nginx
       dockerfile: Dockerfile.prod
     volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf # 挂载nginx配置文件
-      - ./nginx/ssl:/usr/share/nginx/ssl # 挂载ssl证书目录
-      - ./nginx/log:/var/log/nginx # 挂载日志
-      - static_vol:/usr/share/nginx/static # 挂载静态文件
-      - media_vol:/usr/share/nginx/media # 挂载用户上传媒体文件
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf # map nginx config file
+      - ./nginx/ssl:/usr/share/nginx/ssl # map ssl certificate
+      - ./nginx/log:/var/log/nginx # map log
+      - static_vol:/usr/share/nginx/static # map static file
+      - media_vol:/usr/share/nginx/media # map media file 
     networks:
       - nginx_network
     ports:
