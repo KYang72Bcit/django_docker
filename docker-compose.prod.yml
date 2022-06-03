@@ -6,8 +6,6 @@ networks:
   db_network:
     driver: bridge
 
-
-
 services:
   web:
     build: 
@@ -43,20 +41,22 @@ services:
     volumes:
       - mysql_data:/var/lib/mysql/data/
 
-  # nginx:
-  #   build: ./nginx
-  #   volumes:
-  #     - ./compose/nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf # 挂载nginx配置文件
-  #     - ./compose/nginx/ssl:/usr/share/nginx/ssl # 挂载ssl证书目录
-  #     - ./compose/nginx/log:/var/log/nginx # 挂载日志
-  #     - static_vol:/usr/share/nginx/html/static # 挂载静态文件
-  #     - media_vol:/usr/share/nginx/html/media # 挂载用户上传媒体文件
-  #   networks:
-  #     - nginx_network
-  #   ports:
-  #     - 1337:80
-  #   depends_on:
-  #     - web 
+  nginx:
+    build: 
+      context: ./nginx
+      dockerfile: Dockerfile.prod
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/nginx.conf # 挂载nginx配置文件
+      - ./nginx/ssl:/usr/share/nginx/ssl # 挂载ssl证书目录
+      - ./nginx/log:/var/log/nginx # 挂载日志
+      - static_vol:/usr/share/nginx/static # 挂载静态文件
+      - media_vol:/usr/share/nginx/media # 挂载用户上传媒体文件
+    networks:
+      - nginx_network
+    ports:
+      - 1337:80
+    depends_on:
+      - web 
 
 
 volumes:
