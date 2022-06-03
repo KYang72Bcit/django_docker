@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  web:
+    build: 
+      context: ./app
+      dockerfile: Dockerfile.prod
+    depends_on:
+      - db
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./:/usr/src/app/
+    env_file:
+      - ./.env.dev
+    ports:
+      - 8000:8000
+
+  db:
+    image: mariadb:10.8
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_HOST=localhost
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=employee
+      - MYSQL_USER=root
+    volumes:
+      - ./db:/docker-entrypoint-initdb.d/:rw
+      

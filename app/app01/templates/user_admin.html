@@ -1,0 +1,41 @@
+{% extends 'base_template.html' %}
+{% block content %}
+     <div style="margin: 10px">
+            <a class="btn btn-secondary" href="/user/add/">Create new employee</a>
+             <a class="btn btn-secondary" href="/user/add/modelForm/">Create new employee in ModelForm</a>
+        </div>
+
+            <div class="card-header">
+                Employees List
+            </div>
+            <table class="table table-striped table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Age</th>
+        <th scope="col">Gender</th>
+        <th scope="col">Start Data</th>
+        <th scope="col">Department</th>
+      <th scope="col">Operation</th>
+
+    </tr>
+  </thead>
+  <tbody>
+   {% for user in users %}
+    <tr>
+      <td>{{ user.name }}</td>
+        <td>{{ user.age }}</td>
+        <td>{{user.get_gender_display}}</td>
+        <td>{{ user.create_time }}</td>
+         <td>{{ user.depart.title }}</td>
+
+      <td>
+          <a class="btn btn-primary btn-xs" href="/depart/{{ user.id }}/edit/">edit</a>
+          <a class="btn btn-success btn-xs" href="/depart/delete/?uid={{ user.id }}">delete</a>
+      </td>
+
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
