@@ -5,5 +5,7 @@ while ! nc -z db 3306 ; do
     sleep 0.3
 done
 
-python manage.py migrate
+python manage.py makemigrations&&
+python manage.py migrate&&
+gunicorn employeeManage.wsgi:application -c gunicorn.conf
 exec "$@"
