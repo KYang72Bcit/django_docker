@@ -24,8 +24,8 @@ services:
       - media_vol:/home/app/web/media # 以数据卷挂载容器内用户上传媒体文件
     env_file:
       - ./.env.dev
-    expose:
-      - 8000
+    ports:
+      - 8000:8000
     restart: always
 
   db:

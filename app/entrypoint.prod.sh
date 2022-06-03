@@ -7,5 +7,5 @@ done
 
 python manage.py makemigrations&&
 python manage.py migrate&&
-gunicorn employeeManage.wsgi:application -c gunicorn.conf
+gunicorn -c gunicorn.conf.py employeeManage.wsgi:application
 exec "$@"

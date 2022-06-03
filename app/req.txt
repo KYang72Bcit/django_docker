@@ -1,3 +1,4 @@
 Django==4.0
 django-mysql
 gunicorn==20.1.0
+gunicorn[gevent]
