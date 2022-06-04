@@ -8,9 +8,9 @@ backlog = 2048
 
 work_class = 'gevent'
 
-proc_name = 'employeeManagement' # 进程名称   
+proc_name = 'employeeManagement' # process name
 
-pidfile = '/tmp/employManagement.pid' # 设置进程文件目录   
+pidfile = '/tmp/employManagement.pid' # the process working direcotry
 
-timeout = 30 # 超时   
-max_requests = 6000 # 最大请求数   
+timeout = 30  
+max_requests = 6000    
