@@ -18,8 +18,9 @@ services:
       - db_network
     volumes:
       - ./app:/home/app/web # map project code
-      - static_vol:/home/app/web/static # map static file 
-      - media_vol:/home/app/web/media # map media file upload by user 
+      # - ./cred.json:/secret/cred.json #this is for the cloudsql
+      - static_vol:/vol/web/static/ # map static file 
+      # - media_vol:/home/app/web/media # map media file upload by user 
     env_file:
       - ./.env.dev
     ports:

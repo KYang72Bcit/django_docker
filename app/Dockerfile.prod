@@ -54,12 +54,13 @@ RUN chmod +x  $APP_HOME/entrypoint.prod.sh
 COPY . $APP_HOME
 
 # chown all the files to the app user, creating static and media file and change the ownership
-# RUN chown -R app:app $APP_HOME \
-# && mkdir -p /vol/web/static \
+RUN chown -R app:app $APP_HOME \
+&& mkdir -p /vol/web/static \
+# && mkdir -p 
 # && mkdir -p /vol/web/media \
-# && chown -R app:app /vol \
-# && chmod -R 755 /vol
-
+&& chown -R app:app /vol \
+&& chmod -R 755 /vol
+ 
 # change to the app user
 # USER app
 

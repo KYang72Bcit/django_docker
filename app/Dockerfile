@@ -13,14 +13,23 @@ ENV PYTHONUNBUFFERED 1
 RUN apk add netcat-openbsd 
 
 RUN pip install --upgrade pip
-COPY req.txt .
-RUN pip install -r req.txt
+COPY req_dev.txt .
+RUN pip install -r req_dev.txt
 
-COPY wait.sh .
+# RUN mkdir -p /vol/web/static/
+
+# COPY wait.sh .
+# RUN sed -i 's/\r$//g' /usr/src/app/wait.sh
+# RUN chmod +x /usr/src/app/wait.sh
+
+COPY ./wait.sh .
 RUN sed -i 's/\r$//g' /usr/src/app/wait.sh
 RUN chmod +x /usr/src/app/wait.sh
+# RUN sed -i 's/\r$//g' wait.sh
+# RUN chmod +x wait.sh
 
 COPY . .
+
 
 ENTRYPOINT ["/usr/src/app/wait.sh"]
 

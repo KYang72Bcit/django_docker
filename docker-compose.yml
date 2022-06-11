@@ -4,12 +4,13 @@ services:
   web:
     build: 
       context: ./app
-      dockerfile: Dockerfile.prod
+      dockerfile: Dockerfile
     depends_on:
       - db
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - ./:/usr/src/app/
+      - ./web/:/vol/web/
     env_file:
       - ./.env.dev
     ports:
