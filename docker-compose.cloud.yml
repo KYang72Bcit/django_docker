@@ -1,10 +1,10 @@
 version: '3.8'
 
-networks:
-  nginx_network:
-    driver: bridge
-  db_network:
-    driver: bridge
+# networks:
+#   nginx_network:
+#     driver: bridge
+#   db_network:
+#     driver: bridge
 
 services:
   web:
@@ -12,10 +12,10 @@ services:
       context: ./app
       dockerfile: Dockerfile.cloud
     depends_on:
-      - db
-    networks:
-      - nginx_network
-      - db_network
+      - cloudsqlproxy
+    # networks:
+    #   - nginx_network
+    #   - db_network
     volumes:
       - ./app:/home/app/web # map project code
       - ./cred.json:/secret/cred.json #this is for the cloudsql
@@ -48,8 +48,8 @@ services:
     volumes:
       - ./cred.json:/secrets/cloudsql/creds.json
     ports:
-      - 127.0.0.1:3306:3306
-    command: /cloud_sql_proxy -instances="djangodeployment-349819:us-central1:cloudrun"=tcp:0.0.0.0:3306 -credential_file=/secrets/cloudsql/creds.json
+      - 3306:3306
+    command: /cloud_sql_proxy -instances="djangodeployment-349819:us-central1:dockerun"=tcp:0.0.0.0:3306 -credential_file=/secrets/cloudsql/creds.json/cred.json
     restart: always
 
   nginx:
@@ -62,8 +62,8 @@ services:
       - ./nginx/log:/var/log/nginx # map log
       - static_vol:/usr/share/nginx/static # map static file
       - media_vol:/usr/share/nginx/media # map media file 
-    networks:
-      - nginx_network
+    # networks:
+    #   - nginx_network
     ports:
       - 1337:80
     depends_on:

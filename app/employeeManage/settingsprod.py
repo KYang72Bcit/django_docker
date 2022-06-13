@@ -90,7 +90,7 @@ DATABASES = {
         'NAME': 'employee',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': 'db',
+        'HOST': 'cloudsqlproxy',
         'PORT': '3306',
     }
 }

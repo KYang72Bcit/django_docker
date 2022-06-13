@@ -65,5 +65,5 @@ RUN chown -R app:app $APP_HOME \
 # USER app
 
 # run entrypoint.prod.sh
-# ENTRYPOINT ["/home/app/web/entrypoint.prod.sh"]
-CMD gunicorn -c gunicorn.conf.py employeeManage.wsgi:application
+ENTRYPOINT ["/home/app/web/entrypoint.prod.sh"]
+# CMD gunicorn -c gunicorn.conf.py employeeManage.wsgi:application
