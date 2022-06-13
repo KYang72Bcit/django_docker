@@ -90,7 +90,7 @@ DATABASES = {
         'NAME': 'employee',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': 'cloudsqlproxy',
+        'HOST': '/cloudsql/djangodeployment-349819:us-central1:dockerun',
         'PORT': '3306',
     }
 }
