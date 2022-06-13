@@ -54,6 +54,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'employeeManage.urls'
 
+CSRF_TRUSTED_ORIGINS = [
+	'https://*.a.run.app',
+]
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
