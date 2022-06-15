@@ -2,7 +2,6 @@
 #BUILDER#
 #########
 FROM python:3.9.6-alpine as builder
-# FROM python:3.9.6 as builder
 
 WORKDIR /usr/src/app
 
@@ -13,9 +12,9 @@ RUN apk add --no-cache mariadb-connector-c-dev
 RUN apk update && apk add python3 python3-dev mariadb-dev build-base && pip3 install mysqlclient && apk del python3-dev mariadb-dev build-base
 
 RUN pip install --upgrade pip
-# RUN pip install flake8==3.9.2
+
  COPY . .
-# RUN flake8 --ignore=E501,F401 .
+
 
 COPY req_dev.txt .
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r req.txt
@@ -46,9 +45,9 @@ COPY --from=builder /usr/src/app/req.txt .
 RUN pip install --no-cache /wheels/*
 
 # copy entrypoint.prod.sh
-COPY ./entrypoint.prod.sh .
+COPY ./entrypoint.cloud.sh .
 RUN sed -i 's/\r$//g'  $APP_HOME/entrypoint.prod.sh
-RUN chmod +x  $APP_HOME/entrypoint.prod.sh
+RUN chmod +x  $APP_HOME/entrypoint.cloud.sh
 
 # copy project
 COPY . $APP_HOME
@@ -66,4 +65,3 @@ RUN chown -R app:app $APP_HOME \
 
 # run entrypoint.prod.sh
 ENTRYPOINT ["/home/app/web/entrypoint.prod.sh"]
-# CMD gunicorn -c gunicorn.conf.py employeeManage.wsgi:application
